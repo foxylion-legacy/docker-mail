@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   config.ssh.shell = "bash"
-  config.vm.box = "ubuntu/wily64"
+  config.vm.box = "ubuntu/trusty64"
 
   config.vm.provision "shell", inline: <<SHELL
 set -e
@@ -19,6 +19,8 @@ cat <<EOF > /etc/default/docker
 DOCKER_OPTS="--storage-driver=aufs"
 EOF
 service docker restart
+
+echo "cd /vagrant" > /home/vagrant/.bashrc
 
 SHELL
 
