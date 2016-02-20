@@ -1,0 +1,5 @@
+hosts    = ${MYSQL_HOST}
+user     = ${MYSQL_USER}
+password = ${MYSQL_PASS}
+dbname   = ${MYSQL_DB}
+query = SELECT goto FROM alias WHERE address='%s' AND active = '1'

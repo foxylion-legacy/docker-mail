@@ -12,11 +12,7 @@ fi
 echo "> Environment variables:"
 echo "MAIL_HOST=$MAIL_HOST"
 
-echo "> Configuring hostname for amavis..."
-cat <<EOF > /etc/amavis/conf.d/05-node_id
-use strict;
-\$myhostname = "$MAIL_HOST";
-EOF
+/scripts/setup.sh
 
 echo "> Starting supervisor..."
 supervisord -c /supervisor.conf

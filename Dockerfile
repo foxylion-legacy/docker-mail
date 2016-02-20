@@ -8,10 +8,14 @@ RUN apt-get update && apt-get install -y postfix postfix-mysql
 RUN apt-get update && apt-get install -y dovecot-imapd dovecot-pop3d dovecot-mysql
 RUN apt-get update && apt-get install -y amavis clamav clamav-daemon spamassassin
 RUN apt-get update && apt-get install -y supervisor
+RUN apt-get update && apt-get install -y mysql-client
 
-COPY ./scripts /scripts
+COPY scripts /scripts
 RUN chmod -R +x ./scripts/*.sh
-COPY ./config/supervisor.conf /supervisor.conf
+
+COPY config/supervisor.conf /supervisor.conf
+
+COPY config-templates/postfix /etc/postfix
 
 # SMTP & Secure SMTP
 EXPOSE 25  587
@@ -22,6 +26,7 @@ EXPOSE 143 993
 # POP3 & Secure POP3
 EXPOSE 110 995
 
+ENV MYSQL_HOST=mysql
 ENV MYSQL_USER=root
 ENV MYSQL_PASS=root
 ENV MYSQL_DB=mail
