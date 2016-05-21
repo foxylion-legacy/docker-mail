@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu:16.04
 MAINTAINER Jakob Jarosch <dev@jakobjarosch.de>
 
 RUN echo "postfix postfix/mailname string local.cloud" | debconf-set-selections
@@ -16,6 +16,7 @@ RUN chmod -R +x ./scripts/*.sh
 COPY config/supervisor.conf /supervisor.conf
 
 COPY config-templates/postfix /etc/postfix
+COPY config-templates/clamav /etc/clamav
 
 # SMTP & Secure SMTP
 EXPOSE 25  587
